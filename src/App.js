@@ -1,5 +1,8 @@
 import { useState } from "react";
 import Output from "./components/Output";
+import Input from "./components/Input";
+import Button from "./components/Button";
+import InputTwo from "./components/InputTwo";
 
 function App() {
   const [inputValue, setInputValue] = useState(""); //"" [state, setState]
@@ -19,11 +22,14 @@ function App() {
 
   return (
     <div>
-      <input onChange={handleChange} />
-      <button onClick={handleClick}>Click me</button>
+      <Input handleChange={handleChange} />
+      {/* <input onChange={handleChange} /> */}
+      <Button handleClick={handleClick} />
+      {/* <button onClick={handleClick}>Click me</button> */}
       {/* <div>here: {showValue}</div> */}
       {/* properties to be called as "props" */}
       <Output value={showValue} here="here:" />
+      <InputTwo />
     </div>
   );
 }
