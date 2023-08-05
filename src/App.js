@@ -4,11 +4,14 @@ import Input from "./components/Input";
 import Button from "./components/Button";
 import InputTwo from "./components/InputTwo";
 import ProductsList from "./components/ProductsList";
+import Counter from "./components/Counter";
+import CounterContainer from "./components/CounterContainer";
 
 function App() {
   const [inputValue, setInputValue] = useState(""); //"" [state, setState]
   //const [showValue, setShowValue] = useState("");
   const [products, setProducts] = useState(["iphone", "samsung"]);
+
   console.log("products>>>", products);
   const handleChange = (e) => {
     //console.log("value>>>", e.target.value);
@@ -21,7 +24,7 @@ function App() {
   const handleClick = () => {
     // setShowValue(inputValue);
     //1st aproach
-    // const tempProducts = [...products];
+    // const tempProducts = [...products]; //products
     // tempProducts.push(inputValue);
     // console.log("sdfsfd", tempProducts);
     // setProducts(tempProducts);
@@ -34,16 +37,17 @@ function App() {
 
   return (
     <div>
-      <Input handleChange={handleChange} />
+      {/* <Input handleChange={handleChange} /> */}
       {/* <input onChange={handleChange} /> */}
-      <Button handleClick={handleClick} />
+      {/* <Button handleClick={handleClick} /> */}
       {/* <button onClick={handleClick}>Click me</button> */}
       {/* <div>here: {showValue}</div> */}
       {/* properties to be called as "props" */}
       {/* <Output value={showValue} here="here:" /> */}
       {/* <InputTwo /> */}
       {/* products here */}
-      <ProductsList products={products} />
+      {/* <ProductsList products={products} /> */}
+      <CounterContainer />
     </div>
   );
 }
