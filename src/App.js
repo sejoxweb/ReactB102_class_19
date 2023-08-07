@@ -6,6 +6,7 @@ import InputTwo from "./components/InputTwo";
 import ProductsList from "./components/ProductsList";
 import Counter from "./components/Counter";
 import CounterContainer from "./components/CounterContainer";
+import Todos from "./components/Todos";
 
 function App() {
   const [inputValue, setInputValue] = useState(""); //"" [state, setState]
@@ -47,7 +48,8 @@ function App() {
       {/* <InputTwo /> */}
       {/* products here */}
       {/* <ProductsList products={products} /> */}
-      <CounterContainer />
+      {/* <CounterContainer /> */}
+      <Todos />
     </div>
   );
 }
