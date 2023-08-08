@@ -13,7 +13,7 @@ function App() {
   //const [showValue, setShowValue] = useState("");
   const [products, setProducts] = useState(["iphone", "samsung"]);
 
-  console.log("products>>>", products);
+  //console.log("products>>>", products);
   const handleChange = (e) => {
     //console.log("value>>>", e.target.value);
     //inputValue = e.target.value;
