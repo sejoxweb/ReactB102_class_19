@@ -8,14 +8,44 @@ const Todos = () => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((json) => setUsers(json));
+    // const json = {
+    //   users:["user1"]
+    // }
+    // setUsers(json.users)
   }, []);
 
-  const handleDelete = () => {
-    fetch("https://jsonplaceholder.typicode.com/users/1", { method: "DELETE" })
+  const handleDelete = (e, id) => {
+    fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+      method: "DELETE",
+    })
       .then((response) => response.json())
       .then((json) => {
         let tempUsers = [...users];
-        tempUsers = tempUsers.filter((user) => user.id !== 1);
+        tempUsers = tempUsers.filter((user) => user.id !== id);
+        setUsers(tempUsers);
+      });
+  };
+
+  const handleUpdate = (e, user) => {
+    console.log("user>>", user);
+    const updatedUser = {
+      ...user,
+      name: "sejox",
+    };
+    fetch(`https://jsonplaceholder.typicode.com/users/${user.id}`, {
+      method: "PUT",
+      body: JSON.stringify(updatedUser),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        let tempUsers = [...users];
+        tempUsers = tempUsers.map((u) => {
+          if (u.id === user.id) {
+            return updatedUser;
+          } else {
+            return u;
+          }
+        });
         setUsers(tempUsers);
       });
   };
@@ -27,7 +57,9 @@ const Todos = () => {
         <div>
           {users.map((user) => (
             <li key={user.id} onClick={() => setSelectedUser(user)}>
-              {user.name} <button onClick={handleDelete}>delete</button>
+              {user.name}{" "}
+              <button onClick={(e) => handleDelete(e, user.id)}>delete</button>
+              <button onClick={(e) => handleUpdate(e, user)}>edit</button>
             </li>
           ))}
         </div>
