@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 const Todos = () => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState({});
+  const [editUser, setEditUser] = useState({});
+
+  console.log("editUser>>>", editUser);
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -26,28 +29,32 @@ const Todos = () => {
       });
   };
 
-  const handleUpdate = (e, user) => {
-    console.log("user>>", user);
-    const updatedUser = {
-      ...user,
-      name: "sejox",
-    };
-    fetch(`https://jsonplaceholder.typicode.com/users/${user.id}`, {
+  const handleUpdate = () => {
+    fetch(`https://jsonplaceholder.typicode.com/users/${editUser.id}`, {
       method: "PUT",
-      body: JSON.stringify(updatedUser),
+      body: JSON.stringify(editUser),
     })
       .then((response) => response.json())
       .then((json) => {
         let tempUsers = [...users];
         tempUsers = tempUsers.map((u) => {
-          if (u.id === user.id) {
-            return updatedUser;
+          if (u.id === editUser.id) {
+            return editUser;
           } else {
             return u;
           }
         });
         setUsers(tempUsers);
       });
+  };
+
+  const handleEdit = (user) => {
+    setEditUser(user);
+  };
+
+  const handleChange = (event) => {
+    console.log(event.target.value);
+    setEditUser({ ...editUser, name: event.target.value });
   };
 
   return (
@@ -59,7 +66,7 @@ const Todos = () => {
             <li key={user.id} onClick={() => setSelectedUser(user)}>
               {user.name}{" "}
               <button onClick={(e) => handleDelete(e, user.id)}>delete</button>
-              <button onClick={(e) => handleUpdate(e, user)}>edit</button>
+              <button onClick={() => handleEdit(user)}>edit</button>
             </li>
           ))}
         </div>
@@ -75,6 +82,10 @@ const Todos = () => {
             <div>No user selected</div>
           )}
         </div>
+      </div>
+      <div style={{ marginTop: "30px" }}>
+        <input value={editUser.name} onChange={handleChange} />{" "}
+        <button onClick={handleUpdate}>update</button>
       </div>
     </div>
   );
