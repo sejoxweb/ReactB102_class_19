@@ -3,21 +3,24 @@ import Counter from "./Counter";
 import CounterTwo from "./CounterTwo";
 
 const CounterContainer = () => {
-  const [counter, setCounter] = useState(0);
+  const [count, setCounter] = useState(0);
+  const [currentButton, setCurrentButton] = useState("");
   function increment() {
-    //counter++ equalt to coutner = counter+1
-    setCounter(counter + 1);
+    //count++ equalt to coutner = count+1
+    setCurrentButton("increment");
+    setCounter(count + 1);
   }
 
   function decrement() {
-    setCounter(counter - 1);
+    setCurrentButton("decrement");
+    setCounter(count - 1);
   }
   return (
     <div>
       {/* firstCounter */}
-      <Counter increment={increment} decrement={decrement} counter={counter} />
+      <Counter increment={increment} decrement={decrement} count={count} />
       {/* secondCounter */}
-      <CounterTwo counter={counter} increment={increment} />
+      <CounterTwo firstCounterValue={count} currentButton={currentButton} />
     </div>
   );
 };

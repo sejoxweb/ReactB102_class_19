@@ -5,8 +5,6 @@ const Todos = () => {
   const [selectedUser, setSelectedUser] = useState({});
   const [editUser, setEditUser] = useState({});
 
-  console.log("editUser>>>", editUser);
-
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
@@ -26,6 +24,12 @@ const Todos = () => {
         let tempUsers = [...users];
         tempUsers = tempUsers.filter((user) => user.id !== id);
         setUsers(tempUsers);
+        if (selectedUser.id === id) {
+          setSelectedUser({});
+        }
+        if (editUser.id === id) {
+          setEditUser({});
+        }
       });
   };
 
@@ -45,6 +49,10 @@ const Todos = () => {
           }
         });
         setUsers(tempUsers);
+        if (editUser.id === selectedUser.id) {
+          setSelectedUser(editUser);
+        }
+        setEditUser({});
       });
   };
 
@@ -53,8 +61,19 @@ const Todos = () => {
   };
 
   const handleChange = (event) => {
-    console.log(event.target.value);
-    setEditUser({ ...editUser, name: event.target.value });
+    setEditUser({ ...editUser, [event.target.id]: event.target.value });
+
+    // if (event.target.id === "name") {
+    //   setEditUser({ ...editUser, name: event.target.value });
+    // }
+
+    // if (event.target.id === "phone") {
+    //   setEditUser({ ...editUser, phone: event.target.value });
+    // }
+
+    // if (event.target.id === "email") {
+    //   setEditUser({ ...editUser, email: event.target.value });
+    // }
   };
 
   return (
@@ -63,8 +82,8 @@ const Todos = () => {
       <div style={{ display: "flex" }}>
         <div>
           {users.map((user) => (
-            <li key={user.id} onClick={() => setSelectedUser(user)}>
-              {user.name}{" "}
+            <li key={user.id}>
+              <span onClick={() => setSelectedUser(user)}>{user.name}</span>
               <button onClick={(e) => handleDelete(e, user.id)}>delete</button>
               <button onClick={() => handleEdit(user)}>edit</button>
             </li>
@@ -77,6 +96,8 @@ const Todos = () => {
               {selectedUser.name}
               <br />
               {selectedUser.company.name}
+              <br />
+              {selectedUser.phone}
             </div>
           ) : (
             <div>No user selected</div>
@@ -84,8 +105,26 @@ const Todos = () => {
         </div>
       </div>
       <div style={{ marginTop: "30px" }}>
-        <input value={editUser.name} onChange={handleChange} />{" "}
-        <button onClick={handleUpdate}>update</button>
+        <label>name</label>
+        <input id="name" value={editUser.name || ""} onChange={handleChange} />
+        <br />
+        <label>phone</label>
+        <input
+          id="phone"
+          value={editUser.phone || ""}
+          onChange={handleChange}
+        />
+        <br />
+        <label>email</label>
+        <input
+          id="email"
+          value={editUser.email || ""}
+          onChange={handleChange}
+        />
+        <br />
+        <button disabled={!editUser.id} onClick={handleUpdate}>
+          update
+        </button>
       </div>
     </div>
   );

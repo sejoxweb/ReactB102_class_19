@@ -1,28 +1,36 @@
 import React, { useState, useEffect } from "react";
 
-const CounterTwo = ({ counter: firstCounterValue }) => {
-  const [counterii, setCounterii] = useState(0);
+const CounterTwo = ({ firstCounterValue, currentButton }) => {
+  const [countii, setCounterii] = useState(0);
 
   useEffect(() => {
-    setCounterii(firstCounterValue + counterii);
-  }, [firstCounterValue]);
+    if (currentButton === "increment") {
+      debugger;
+      console.log("firstCounterValue>>>", firstCounterValue);
+      setCounterii(countii + 1);
+    }
+
+    if (currentButton === "decrement") {
+      debugger;
+      setCounterii(countii - 1);
+    }
+  }, [firstCounterValue, currentButton]);
 
   const handleInrease = () => {
-    setCounterii(counterii + 1);
+    setCounterii(countii + 1);
   };
 
   const handleDerease = () => {
-    setCounterii(counterii - 1);
+    setCounterii(countii - 1);
   };
 
-  console.log("firstCounterValue>>>", firstCounterValue);
-  console.log("counterii", counterii);
+  console.log("countii", countii);
 
   return (
     <div style={{ margin: "50px" }}>
-      counter two <button onClick={handleDerease}>-</button>
+      count two <button onClick={handleDerease}>-</button>
       {/* <span style={{ padding: "10px" }}>{firstCounterValue}</span> */}
-      <span> {counterii} </span>
+      <span> {countii} </span>
       <button onClick={handleInrease}>+</button>
     </div>
   );
