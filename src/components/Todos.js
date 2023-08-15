@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+import UserDetails from "./UserDetails";
+import CreateUpdate from "./CreateUpdate";
+import Modal from "./Modal";
 
 const Todos = () => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState({});
   const [editUser, setEditUser] = useState({});
+  const [isEdit, setEdit] = useState(false);
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -39,7 +43,7 @@ const Todos = () => {
       body: JSON.stringify(editUser),
     })
       .then((response) => response.json())
-      .then((json) => {
+      .then(() => {
         let tempUsers = [...users];
         tempUsers = tempUsers.map((u) => {
           if (u.id === editUser.id) {
@@ -58,27 +62,39 @@ const Todos = () => {
 
   const handleEdit = (user) => {
     setEditUser(user);
+    setEdit(true);
   };
 
-  const handleChange = (event) => {
-    setEditUser({ ...editUser, [event.target.id]: event.target.value });
+  const handleChange = (e) => {
+    setEditUser({ ...editUser, [e.target.id]: e.target.value });
+  };
 
-    // if (event.target.id === "name") {
-    //   setEditUser({ ...editUser, name: event.target.value });
-    // }
+  const handleCreate = async () => {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users", {
+      method: "POST",
+      body: JSON.stringify(editUser),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
 
-    // if (event.target.id === "phone") {
-    //   setEditUser({ ...editUser, phone: event.target.value });
-    // }
+    const newUser = await response.json();
 
-    // if (event.target.id === "email") {
-    //   setEditUser({ ...editUser, email: event.target.value });
-    // }
+    setUsers((prevUsers) => [...prevUsers, newUser]); //setUser([...users, newUser])
+    setEditUser({});
   };
 
   return (
     <div>
-      Todos
+      Users{" "}
+      <button
+        onClick={() => {
+          setEdit(false);
+          setEditUser({});
+        }}
+      >
+        Add User
+      </button>
       <div style={{ display: "flex" }}>
         <div>
           {users.map((user) => (
@@ -89,43 +105,25 @@ const Todos = () => {
             </li>
           ))}
         </div>
-        <div>
-          User Details
-          {Object.keys(selectedUser).length > 0 ? (
-            <div>
-              {selectedUser.name}
-              <br />
-              {selectedUser.company.name}
-              <br />
-              {selectedUser.phone}
-            </div>
-          ) : (
-            <div>No user selected</div>
-          )}
-        </div>
       </div>
-      <div style={{ marginTop: "30px" }}>
-        <label>name</label>
-        <input id="name" value={editUser.name || ""} onChange={handleChange} />
-        <br />
-        <label>phone</label>
-        <input
-          id="phone"
-          value={editUser.phone || ""}
-          onChange={handleChange}
-        />
-        <br />
-        <label>email</label>
-        <input
-          id="email"
-          value={editUser.email || ""}
-          onChange={handleChange}
-        />
-        <br />
-        <button disabled={!editUser.id} onClick={handleUpdate}>
-          update
-        </button>
-      </div>
+      <CreateUpdate
+        editUser={editUser}
+        handleChange={handleChange}
+        isEdit={isEdit}
+        handleCreate={handleCreate}
+        handleUpdate={handleUpdate}
+      />
+      {selectedUser.name && (
+        <Modal>
+          <UserDetails
+            user={selectedUser}
+            onClose={() => setSelectedUser({})}
+          />
+        </Modal>
+      )}
+      <Modal>
+        <div>something</div>
+      </Modal>
     </div>
   );
 };
