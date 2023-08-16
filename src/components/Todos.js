@@ -8,6 +8,7 @@ const Todos = () => {
   const [selectedUser, setSelectedUser] = useState({});
   const [editUser, setEditUser] = useState({});
   const [isEdit, setEdit] = useState(false);
+  const [isModalTwoOpen, setIsModalTwoOpen] = useState(false);
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -44,6 +45,7 @@ const Todos = () => {
     })
       .then((response) => response.json())
       .then(() => {
+        setIsModalTwoOpen(false);
         let tempUsers = [...users];
         tempUsers = tempUsers.map((u) => {
           if (u.id === editUser.id) {
@@ -61,12 +63,21 @@ const Todos = () => {
   };
 
   const handleEdit = (user) => {
+    setIsModalTwoOpen(true);
     setEditUser(user);
     setEdit(true);
   };
 
   const handleChange = (e) => {
-    setEditUser({ ...editUser, [e.target.id]: e.target.value });
+    if (e.target.id.includes("company")) {
+      const key = e.target.id.split("_")[1]; // ['company', 'name']
+      setEditUser((prevState) => ({
+        ...prevState,
+        company: { ...prevState.company, [key]: e.target.value },
+      }));
+    } else {
+      setEditUser({ ...editUser, [e.target.id]: e.target.value });
+    }
   };
 
   const handleCreate = async () => {
@@ -79,7 +90,7 @@ const Todos = () => {
     });
 
     const newUser = await response.json();
-
+    setIsModalTwoOpen(false);
     setUsers((prevUsers) => [...prevUsers, newUser]); //setUser([...users, newUser])
     setEditUser({});
   };
@@ -89,6 +100,7 @@ const Todos = () => {
       Users{" "}
       <button
         onClick={() => {
+          setIsModalTwoOpen(true);
           setEdit(false);
           setEditUser({});
         }}
@@ -106,24 +118,22 @@ const Todos = () => {
           ))}
         </div>
       </div>
-      <CreateUpdate
-        editUser={editUser}
-        handleChange={handleChange}
-        isEdit={isEdit}
-        handleCreate={handleCreate}
-        handleUpdate={handleUpdate}
-      />
       {selectedUser.name && (
-        <Modal>
-          <UserDetails
-            user={selectedUser}
-            onClose={() => setSelectedUser({})}
+        <Modal onClose={() => setSelectedUser({})}>
+          <UserDetails user={selectedUser} />
+        </Modal>
+      )}
+      {isModalTwoOpen && (
+        <Modal onClose={() => setIsModalTwoOpen(false)}>
+          <CreateUpdate
+            editUser={editUser}
+            handleChange={handleChange}
+            isEdit={isEdit}
+            handleCreate={handleCreate}
+            handleUpdate={handleUpdate}
           />
         </Modal>
       )}
-      <Modal>
-        <div>something</div>
-      </Modal>
     </div>
   );
 };
