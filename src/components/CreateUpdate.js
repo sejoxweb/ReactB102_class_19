@@ -21,7 +21,7 @@ const CreateUpdate = ({
       <label>company name</label>
       <input
         id="company_name"
-        value={editUser.company.name || ""}
+        value={editUser?.company?.name || ""}
         onChange={handleChange}
       />
       <br />

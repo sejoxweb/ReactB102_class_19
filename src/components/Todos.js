@@ -11,7 +11,7 @@ const Todos = () => {
   const [isModalTwoOpen, setIsModalTwoOpen] = useState(false);
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch("http://localhost:3004/users")
       .then((response) => response.json())
       .then((json) => setUsers(json));
     // const json = {
@@ -21,7 +21,7 @@ const Todos = () => {
   }, []);
 
   const handleDelete = (e, id) => {
-    fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+    fetch(`http://localhost:3004/users/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
@@ -39,9 +39,12 @@ const Todos = () => {
   };
 
   const handleUpdate = () => {
-    fetch(`https://jsonplaceholder.typicode.com/users/${editUser.id}`, {
+    fetch(`http://localhost:3004/users/${editUser.id}`, {
       method: "PUT",
       body: JSON.stringify(editUser),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
     })
       .then((response) => response.json())
       .then(() => {
@@ -81,7 +84,7 @@ const Todos = () => {
   };
 
   const handleCreate = async () => {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users", {
+    const response = await fetch("http://localhost:3004/users", {
       method: "POST",
       body: JSON.stringify(editUser),
       headers: {
