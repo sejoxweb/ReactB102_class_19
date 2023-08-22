@@ -2,16 +2,16 @@
 
 import "./App.css";
 import { StyledButton } from "./components/Button";
+import ExampleUseCallBack from "./components/ExampleUseCallBack";
 
 import css from "./test.module.css";
-
-console.log("css>>", css);
 
 function App() {
   return (
     <div>
+      <ExampleUseCallBack />
       {/* <ControlledAndUnControlled /> */}
-      <h1
+      {/* <h1
         className={`heading ${css.test} ${css.test2}`}
         style={{ fontSize: "40px" }}
       >
@@ -21,7 +21,7 @@ function App() {
       <StyledButton variant="primary">click me</StyledButton>
       <StyledButton className={`heading ${css.test} ${css.test2}`}>
         click me 2
-      </StyledButton>
+      </StyledButton> */}
     </div>
   );
 }
