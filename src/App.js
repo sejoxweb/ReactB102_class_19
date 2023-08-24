@@ -7,13 +7,19 @@ import UseMemoExample from "./components/UseMemoExample";
 import UseRefExampleOne from "./components/UseRefExampleOne";
 import UseRefExampleThree from "./components/UseRefExampleThree";
 import UseRefExampleTwo from "./components/UseRefExampleTwo";
+import CustomHookExample from "./components/CustomHookExample";
+import CustomHookExampleTwo from "./components/CustomHookExampleTwo";
+import UseRefVsUseMemo from "./components/UseRefVsUseMemo";
 
 import css from "./test.module.css";
 
 function App() {
   return (
     <div>
-      <UseRefExampleThree />
+      <UseRefVsUseMemo />
+      {/* <CustomHookExampleTwo /> */}
+      {/* <CustomHookExample /> */}
+      {/* <UseRefExampleThree /> */}
       {/* <UseRefExampleTwo /> */}
       {/* <UseRefExampleOne /> */}
       {/* <UseMemoExample /> */}
