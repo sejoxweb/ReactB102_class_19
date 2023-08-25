@@ -7,6 +7,7 @@ const UseRefExampleOne = () => {
   useEffect(() => {
     count.current = count.current + 1;
   });
+
   return (
     <div>
       <input onChange={(e) => setNum(parseInt(e.target.value))} />

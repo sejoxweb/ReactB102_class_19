@@ -2,6 +2,9 @@ import React from "react";
 import useFetch from "../hooks/useFetch";
 
 const List = ({ data }) => {
+  // return data && data.map((item) => {
+  //   return <p key={item.id}>{item.title}</p>;
+  // });
   if (data) {
     return data.map((item) => {
       return <p key={item.id}>{item.title}</p>;
