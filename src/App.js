@@ -17,13 +17,18 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import NoPage from "./pages/NoPage";
+import UseReducerExample from "./components/UseReducerExample";
+import UseReducerExampleTwo from "./components/UseReducerExampleTwo";
 
 function App() {
-  const apiKey = process.env.REACT_APP_API_KEY;
-  const apiKeyProd = process.env.REACT_APP_API_KEY_PROD;
+  // const apiKey = process.env.REACT_APP_API_KEY;
+  // const apiKeyProd = process.env.REACT_APP_API_KEY_PROD;
+
   return (
     <div>
-      {process.env.DEV ? apiKey : apiKeyProd}
+      // {/* <UseReducerExampleTwo /> */}
+      {/* <UseReducerExample /> */}
+      {/* {process.env.DEV ? apiKey : apiKeyProd}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -33,7 +38,7 @@ function App() {
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
       {/* <UseRefVsUseMemo /> */}
       {/* <CustomHookExampleTwo /> */}
       {/* <CustomHookExample /> */}
