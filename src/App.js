@@ -19,6 +19,8 @@ import About from "./pages/About";
 import NoPage from "./pages/NoPage";
 import UseReducerExample from "./components/UseReducerExample";
 import UseReducerExampleTwo from "./components/UseReducerExampleTwo";
+import NoPortalExample from "./components/NoPortalExample";
+import PortalExample from "./components/PortalExample";
 
 function App() {
   // const apiKey = process.env.REACT_APP_API_KEY;
@@ -26,7 +28,15 @@ function App() {
 
   return (
     <div>
-      // {/* <UseReducerExampleTwo /> */}
+      <>
+        <div className="clipping-container">
+          <NoPortalExample />
+        </div>
+        <div className="clipping-container">
+          <PortalExample />
+        </div>
+      </>
+      {/* <UseReducerExampleTwo /> */}
       {/* <UseReducerExample /> */}
       {/* {process.env.DEV ? apiKey : apiKeyProd}
       <BrowserRouter>
