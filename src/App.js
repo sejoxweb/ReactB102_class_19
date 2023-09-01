@@ -21,6 +21,8 @@ import UseReducerExample from "./components/UseReducerExample";
 import UseReducerExampleTwo from "./components/UseReducerExampleTwo";
 import NoPortalExample from "./components/NoPortalExample";
 import PortalExample from "./components/PortalExample";
+import RenderPropsExample from "./components/RenderPropsExample";
+import ForwardingRefExample from "./components/ForwardingRefExample";
 
 function App() {
   // const apiKey = process.env.REACT_APP_API_KEY;
@@ -28,14 +30,16 @@ function App() {
 
   return (
     <div>
-      <>
+      <ForwardingRefExample />
+      {/* <RenderPropsExample /> */}
+      {/* <>
         <div className="clipping-container">
           <NoPortalExample />
         </div>
         <div className="clipping-container">
           <PortalExample />
         </div>
-      </>
+      </> */}
       {/* <UseReducerExampleTwo /> */}
       {/* <UseReducerExample /> */}
       {/* {process.env.DEV ? apiKey : apiKeyProd}
