@@ -23,6 +23,7 @@ import NoPortalExample from "./components/NoPortalExample";
 import PortalExample from "./components/PortalExample";
 import RenderPropsExample from "./components/RenderPropsExample";
 import ForwardingRefExample from "./components/ForwardingRefExample";
+import QuestionApp from "./pages/QuestionsApp";
 
 function App() {
   // const apiKey = process.env.REACT_APP_API_KEY;
@@ -30,7 +31,8 @@ function App() {
 
   return (
     <div>
-      <ForwardingRefExample />
+      <QuestionApp />
+      {/* <ForwardingRefExample /> */}
       {/* <RenderPropsExample /> */}
       {/* <>
         <div className="clipping-container">
