@@ -24,6 +24,8 @@ import PortalExample from "./components/PortalExample";
 import RenderPropsExample from "./components/RenderPropsExample";
 import ForwardingRefExample from "./components/ForwardingRefExample";
 import QuestionApp from "./pages/QuestionsApp";
+import CounterContextExample from "./pages/CounterContextExample";
+import LevelContextExample from "./pages/LevelContextExample";
 
 function App() {
   // const apiKey = process.env.REACT_APP_API_KEY;
@@ -31,7 +33,9 @@ function App() {
 
   return (
     <div>
-      <QuestionApp />
+      <LevelContextExample />
+      {/* <CounterContextExample /> */}
+      {/* <QuestionApp /> */}
       {/* <ForwardingRefExample /> */}
       {/* <RenderPropsExample /> */}
       {/* <>

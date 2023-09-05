@@ -88,3 +88,10 @@ ul {
   left: calc(50% - 125px);
   bottom: 70px;
 }
+
+.section {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+}
